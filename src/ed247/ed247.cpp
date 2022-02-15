@@ -657,7 +657,7 @@ ed247_status_t libed247_set_simulation_time_ns(
       PRINT_ERROR(__func__ << ": invalid time_sample pointer");
       return ED247_STATUS_FAILURE;
   }
-#ifdef __linux__
+#ifdef __unix__
   struct timespec tp;
   clock_gettime(CLOCK_MONOTONIC_RAW, &tp);
   time_sample->epoch_s = (uint32_t)tp.tv_sec;
