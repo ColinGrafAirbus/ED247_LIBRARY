@@ -1,0 +1,5 @@
+<map id="ed247::StreamSample" name="ed247::StreamSample">
+<area shape="rect" id="node2" href="$classed247_1_1_base_sample.html" title="{ed247::BaseSample\n||+ BaseSample()\l+ BaseSample()\l+ operator=()\l+ size()\l+ capacity()\l+ data()\l+ empty()\l+ copy()\l+ copy()\l+ reset()\l+ data_rw()\l+ set_size()\l+ allocate()\l+ allocated()\l+ deallocate()\l}" alt="" coords="5,315,144,597"/>
+<area shape="rect" id="node3" href="$structed247__sample__info__s.html" title="Sample information. " alt="" coords="329,417,476,495"/>
+<area shape="rect" id="node4" href="$structed247__timestamp__t.html" title="Timestamp structure, seconds from EPOCH (January 1st 1970) and nanoseconds offset with reference to p..." alt="" coords="148,160,284,237"/>
+</map>

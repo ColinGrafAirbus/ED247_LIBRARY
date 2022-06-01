@@ -1,0 +1,3 @@
+<map id="ed247_internal_channel_t" name="ed247_internal_channel_t">
+<area shape="rect" id="node2" href="$classed247_1_1_channel.html" title="{ed247::Channel\n|# _configuration\l# _emitters\l# _receivers\l# _streams\l# _sstreams\l# _header\l# _updated\l# _buffer\l|+ Channel()\l+ ~Channel()\l+ set_user_data()\l+ get_user_data()\l+ get_configuration()\l+ get_header()\l+ get_name()\l+ add_emitter()\l+ has_emitter()\l+ add_receiver()\l+ has_receiver()\l+ add_stream()\l+ has_samples_to_send()\l+ send()\l+ encode()\l+ decode()\l+ get_emitters()\l+ get_receivers()\l+ buffer()\l+ streams()\l+ find_streams()\l+ get_stream()\l+ sstreams()\l+ missed_frames()\l# allocate_buffer()\l# populate_sstreams()\l}" alt="" coords="5,131,176,677"/>
+</map>

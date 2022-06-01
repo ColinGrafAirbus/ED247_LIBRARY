@@ -1,0 +1,3 @@
+<map id="ed247::ComInterface" name="ed247::ComInterface">
+<area shape="rect" id="node3" href="$classed247_1_1_udp_socket.html" title="{ed247::UdpSocket\n|+ MAX_FRAME_SIZE\l# _socket_infos\l# _socket\l# _destinations\l# _joined_multicast_groups\l# _sources\l# _recv\l|+ UdpSocket()\l+ ~UdpSocket()\l+ is_valid()\l+ get_name()\l+ get_socket()\l+ get_socket_infos()\l+ send_frame()\l+ recv()\l+ register_channel_emitter()\l+ register_channel_receiver()\l+ unregister_channel()\l+ get_recv_frame()\l+ get_last_error()\l# initialize()\l# close()\l}" alt="" coords="5,435,195,805"/>
+</map>

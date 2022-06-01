@@ -1,0 +1,6 @@
+<map id="ed247::SignalBuilder&lt; T, E... &gt;" name="ed247::SignalBuilder&lt; T, E... &gt;">
+<area shape="rect" id="node2" href="$structed247_1_1_signal_builder.html" title="{ed247::SignalBuilder\l\&lt; E... \&gt;\n||+ SignalBuilder()\l+ create()\l}" alt="" coords="27,163,168,269"/>
+<area shape="rect" id="node3" href="$structed247_1_1_signal_builder.html" title="{ed247::SignalBuilder\&lt; E \&gt;\n||+ SignalBuilder()\l+ create()\l}" alt="" coords="5,6,179,98"/>
+<area shape="rect" id="node4" href="$struct_signal_type_checker.html" title="{SignalTypeChecker\&lt; T \&gt;\n||}" alt="" coords="200,177,368,255"/>
+<area shape="rect" id="node5" href="$struct_signal_type_checker.html" title="{SignalTypeChecker\&lt; E \&gt;\n||}" alt="" coords="203,13,372,91"/>
+</map>

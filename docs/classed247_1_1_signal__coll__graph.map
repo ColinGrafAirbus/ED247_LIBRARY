@@ -1,0 +1,5 @@
+<map id="ed247::Signal&lt; E &gt;" name="ed247::Signal&lt; E &gt;">
+<area shape="rect" id="node2" href="$classed247_1_1_base_signal.html" title="{ed247::BaseSignal\n||+ BaseSignal()\l+ BaseSignal()\l+ ~BaseSignal()\l+ set_user_data()\l+ get_user_data()\l+ get_configuration()\l+ get_name()\l+ get_stream()\l+ allocate_sample()\l+ position()\l+ nad_type_size()\l+ sample_max_size_bytes()\l}" alt="" coords="291,163,477,402"/>
+<area shape="rect" id="node3" href="$structed247__internal__signal__t.html" title="{ed247_internal_signal_t\n||}" alt="" coords="5,13,163,91"/>
+<area shape="rect" id="node7" href="$struct_signal_type_checker.html" title="{SignalTypeChecker\&lt; E \&gt;\n||}" alt="" coords="502,244,671,321"/>
+</map>

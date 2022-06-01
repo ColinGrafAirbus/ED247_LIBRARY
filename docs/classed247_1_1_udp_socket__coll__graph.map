@@ -1,0 +1,7 @@
+<map id="ed247::UdpSocket" name="ed247::UdpSocket">
+<area shape="rect" id="node2" href="$classed247_1_1_com_interface.html" title="{ed247::ComInterface\n||+ ~ComInterface()\l+ unregister_channel()\l+ get_name()\l+ send_frame()\l+ register_send_callback()\l+ unregister_send_callback()\l+ register_recv_callback()\l+ unregister_recv_callback()\l# run_send_callbacks()\l# run_recv_callbacks()\l}" alt="" coords="296,190,485,399"/>
+<area shape="rect" id="node6" href="$structed247_1_1_socket_infos.html" title="{ed247::SocketInfos\n||+ SocketInfos()\l+ SocketInfos()\l+ SocketInfos()\l+ operator=()\l+ is_default()\l+ operator std::string()\l+ operator==()\l}" alt="" coords="690,212,840,377"/>
+<area shape="rect" id="node7" href="$classsockaddr__in.html" title="{sockaddr_in\n||}" alt="" coords="613,20,704,97"/>
+<area shape="rect" id="node11" href="$classbool.html" title="{bool\n||}" alt="" coords="1207,20,1253,97"/>
+<area shape="rect" id="node15" href="$structed247_1_1_udp_socket_1_1_frame.html" title="{ed247::UdpSocket::Frame\n||}" alt="" coords="1290,256,1464,333"/>
+</map>

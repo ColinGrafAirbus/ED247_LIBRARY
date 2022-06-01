@@ -1,0 +1,3 @@
+<map id="ed247_internal_context_t" name="ed247_internal_context_t">
+<area shape="rect" id="node2" href="$classed247_1_1_context.html" title="{ed247::Context\n||+ Context()\l+ ~Context()\l+ Context()\l+ Context()\l+ operator=()\l+ operator=()\l+ Context()\l+ initialize()\l+ getRoot()\l+ getPoolSignals()\l+ getPoolStreams()\l+ getPoolInterfaces()\l+ getPoolChannels()\l+ encode_frames()\l+ send_pushed_samples()\l+ wait_frame()\l+ wait_during()\l+ active_frames()\l+ active_streams()\l+ get_runtime_metrics()\l+ set_user_data()\l+ get_user_data()\l}" alt="" coords="5,131,179,517"/>
+</map>

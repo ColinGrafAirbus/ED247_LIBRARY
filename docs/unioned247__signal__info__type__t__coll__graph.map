@@ -1,0 +1,6 @@
+<map id="ed247_signal_info_type_t" name="ed247_signal_info_type_t">
+<area shape="rect" id="node2" href="$structed247__signal__info__vnad__t.html" title="VNAD signal dedicated information subpart. " alt="" coords="214,176,385,253"/>
+<area shape="rect" id="node6" href="$structed247__signal__info__nad__t.html" title="NAD signal dedicated information subpart. " alt="" coords="24,176,189,253"/>
+<area shape="rect" id="node7" href="$structed247__signal__info__dis__t.html" title="DISCRETE signal dedicated information subpart. " alt="" coords="669,176,829,253"/>
+<area shape="rect" id="node8" href="$structed247__signal__info__ana__t.html" title="ANALOG signal dedicated information subpart. " alt="" coords="411,176,576,253"/>
+</map>

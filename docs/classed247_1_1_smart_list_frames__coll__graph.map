@@ -1,0 +1,7 @@
+<map id="ed247::SmartListFrames" name="ed247::SmartListFrames">
+<area shape="rect" id="node2" href="$classed247_1_1_smart_list.html" title="{ed247::SmartList\&lt; std\l::shared_ptr\&lt; ed247_frame_t \&gt; \&gt;\n||+ SmartList()\l+ SmartList()\l+ ~SmartList()\l+ next()\l+ next_ok()\l+ reset()\l+ set_managed()\l+ managed()\l# next_iter()\l# current_value()\l}" alt="" coords="156,435,369,659"/>
+<area shape="rect" id="node4" href="$classstd_1_1vector_3_01std_1_1shared__ptr_3_01ed247__frame__t_01_4_01_4_1_1iterator.html" title="{iterator\n||}" alt="" coords="197,5,259,83"/>
+<area shape="rect" id="node6" href="$classed247_1_1_smart_list.html" title="{ed247::SmartList\&lt; T \&gt;\n||+ SmartList()\l+ SmartList()\l+ ~SmartList()\l+ next()\l+ next_ok()\l+ reset()\l+ set_managed()\l+ managed()\l# next_iter()\l# current_value()\l}" alt="" coords="282,147,435,357"/>
+<area shape="rect" id="node5" href="$classbool.html" title="{bool\n||}" alt="" coords="445,5,491,83"/>
+<area shape="rect" id="node8" href="$structed247__internal__frame__list__t.html" title="{ed247_internal_frame\l_list_t\n||}" alt="" coords="393,501,540,593"/>
+</map>

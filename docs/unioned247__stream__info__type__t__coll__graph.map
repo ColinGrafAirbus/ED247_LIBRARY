@@ -1,0 +1,6 @@
+<map id="ed247_stream_info_type_t" name="ed247_stream_info_type_t">
+<area shape="rect" id="node2" href="$structed247__stream__info__dis__t.html" title="Stream DISCRETE dedicated information structure. " alt="" coords="5,147,171,224"/>
+<area shape="rect" id="node4" href="$structed247__stream__info__nad__t.html" title="Stream NAD dedicated information structure. " alt="" coords="196,147,367,224"/>
+<area shape="rect" id="node5" href="$structed247__stream__info__vnad__t.html" title="Stream VNAD dedicated information structure. " alt="" coords="391,147,569,224"/>
+<area shape="rect" id="node6" href="$structed247__stream__info__ana__t.html" title="Stream ANALOG dedicated information structure. " alt="" coords="593,147,764,224"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ed247::SmartListChannels" name="ed247::SmartListChannels">
+<area shape="rect" id="node2" href="$classed247_1_1_smart_list.html" title="{ed247::SmartList\&lt; std\l::shared_ptr\&lt; Channel \&gt; \&gt;\n||+ SmartList()\l+ SmartList()\l+ ~SmartList()\l+ next()\l+ next_ok()\l+ reset()\l+ set_managed()\l+ managed()\l# next_iter()\l# current_value()\l}" alt="" coords="179,435,353,659"/>
+<area shape="rect" id="node4" href="$classbool.html" title="{bool\n||}" alt="" coords="226,5,272,83"/>
+<area shape="rect" id="node6" href="$classed247_1_1_smart_list.html" title="{ed247::SmartList\&lt; T \&gt;\n||+ SmartList()\l+ SmartList()\l+ ~SmartList()\l+ next()\l+ next_ok()\l+ reset()\l+ set_managed()\l+ managed()\l# next_iter()\l# current_value()\l}" alt="" coords="311,147,464,357"/>
+<area shape="rect" id="node5" href="$classstd_1_1vector_3_01std_1_1shared__ptr_3_01_channel_01_4_01_4_1_1iterator.html" title="{iterator\n||}" alt="" coords="475,5,537,83"/>
+<area shape="rect" id="node8" href="$structed247__internal__channel__list__t.html" title="{ed247_internal_channel\l_list_t\n||}" alt="" coords="378,501,536,593"/>
+</map>

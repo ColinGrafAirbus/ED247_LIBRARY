@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['libed247_5fregister_5fset_5fsimulation_5ftime_5fns_5fhandler',['libed247_register_set_simulation_time_ns_handler',['../group__time.html#ga887fa0d7bb812024813dff080bcda2d0',1,'libed247_register_set_simulation_time_ns_handler(libed247_set_simulation_time_ns_t handler, void *user_data):&#160;ed247.cpp'],['../group__time.html#ga887fa0d7bb812024813dff080bcda2d0',1,'libed247_register_set_simulation_time_ns_handler(libed247_set_simulation_time_ns_t handler, void *user_data):&#160;ed247.cpp']]],
+  ['libed247_5fset_5fsimulation_5ftime_5fns',['libed247_set_simulation_time_ns',['../group__time.html#ga0e880741493461b743440bc08f6c1c1f',1,'libed247_set_simulation_time_ns(ed247_time_sample_t time_sample, void *user_data):&#160;ed247.cpp'],['../group__time.html#ga0e880741493461b743440bc08f6c1c1f',1,'libed247_set_simulation_time_ns(ed247_time_sample_t time_sample, void *user_data):&#160;ed247.cpp']]],
+  ['libed247_5fupdate_5ftime',['libed247_update_time',['../group__time.html#gad327f8c0922482f582e8f76ac873f54e',1,'libed247_update_time(ed247_time_sample_t time_sample, uint32_t epoch_s, uint32_t offset_ns):&#160;ed247.cpp'],['../group__time.html#gad327f8c0922482f582e8f76ac873f54e',1,'libed247_update_time(ed247_time_sample_t time_sample, uint32_t epoch_s, uint32_t offset_ns):&#160;ed247.cpp']]]
+];

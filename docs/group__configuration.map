@@ -1,0 +1,6 @@
+<map id="Configuration" name="Configuration">
+<area shape="rect" id="node1" href="$group__stream.html" title="Stream" alt="" coords="165,107,229,133"/>
+<area shape="rect" id="node2" href="$group__component.html" title="Component" alt="" coords="153,5,242,32"/>
+<area shape="rect" id="node3" href="$group__signal.html" title="Signal" alt="" coords="168,157,227,184"/>
+<area shape="rect" id="node4" href="$group__channel.html" title="Channel" alt="" coords="162,56,233,83"/>
+</map>

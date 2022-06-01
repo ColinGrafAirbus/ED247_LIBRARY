@@ -1,0 +1,26 @@
+var classed247_1_1_context =
+[
+    [ "Builder", "classed247_1_1_context_1_1_builder.html", "classed247_1_1_context_1_1_builder" ],
+    [ "Context", "classed247_1_1_context.html#a103b8247509afe2c6d3bbfc1554b358d", null ],
+    [ "~Context", "classed247_1_1_context.html#ad73e9b55664163754af326938fddf480", null ],
+    [ "Context", "classed247_1_1_context.html#a0afea954fdaec345e97fe855af715abd", null ],
+    [ "Context", "classed247_1_1_context.html#a58f6b0b8bdc872ba79d573d0bd4e7878", null ],
+    [ "Context", "classed247_1_1_context.html#a2ab1a1235d7249c2cfe4dc375506fb92", null ],
+    [ "active_frames", "classed247_1_1_context.html#a64096b617a6e3e9d9d7fe6709ab99d40", null ],
+    [ "active_streams", "classed247_1_1_context.html#af35a0b0ef4ab0da16544c755e8af1783", null ],
+    [ "encode_frames", "classed247_1_1_context.html#ab5e16fe7772dae693f659071feed5be5", null ],
+    [ "get_runtime_metrics", "classed247_1_1_context.html#a23ee741fabbcee34f7838ccb805d3161", null ],
+    [ "get_user_data", "classed247_1_1_context.html#ac94055631e5966a2fd4a9315ffcbe5e5", null ],
+    [ "getPoolChannels", "classed247_1_1_context.html#a3b1c74675675877cb301e9aa7d8bf308", null ],
+    [ "getPoolInterfaces", "classed247_1_1_context.html#ac5a2eb527fd5b93f4b2b0477370b3303", null ],
+    [ "getPoolSignals", "classed247_1_1_context.html#abeb3b3e08442bba4f41f05e0460316ae", null ],
+    [ "getPoolStreams", "classed247_1_1_context.html#a5eef12201354ae413c0a4dbf40c95f22", null ],
+    [ "getRoot", "classed247_1_1_context.html#a31c27943cf0ca9ccd5ebcd59afdecac7", null ],
+    [ "initialize", "classed247_1_1_context.html#a86dc7a0d220db1b85b0813e23c8a0be7", null ],
+    [ "operator=", "classed247_1_1_context.html#a94582fbb1419bee9077fd6641c8465bb", null ],
+    [ "operator=", "classed247_1_1_context.html#ac2f05b1c0ac67f108078d73340bc6066", null ],
+    [ "send_pushed_samples", "classed247_1_1_context.html#abf6d4e0e4d0e0389009e7abe90494295", null ],
+    [ "set_user_data", "classed247_1_1_context.html#a92e554b3e7c0b9c841325a36a717d86a", null ],
+    [ "wait_during", "classed247_1_1_context.html#a9a40270ea576ef33e8364cc8438716a7", null ],
+    [ "wait_frame", "classed247_1_1_context.html#a60f47d2702f33ecafcc04463a728655d", null ]
+];
