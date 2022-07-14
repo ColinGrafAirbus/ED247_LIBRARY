@@ -75,6 +75,12 @@ enum test_actor_id_t {
 #define TEST_SYNC_WRAP(unused, title, test_sync_macro, ...) test_sync_macro
 #define TEST_SYNC(...) TEST_SYNC_WRAP(, ##__VA_ARGS__, TEST_SYNC_TITLE(__VA_ARGS__), TEST_SYNC_NO_TITLE())
 
+#ifdef _MSC_VER
+#undef TEST_SYNC
+#define TEST_SYNC(...) TEST_SYNC_NO_TITLE()
+#undef SAY_SELF
+#define SAY_SELF(m) do {} while(0)
+#endif
 
 
 struct TestParams {

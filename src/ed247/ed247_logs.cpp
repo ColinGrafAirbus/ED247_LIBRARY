@@ -23,7 +23,7 @@
  *****************************************************************************/
 #include "ed247_logs.h"
 #include <iomanip>
-
+#include <algorithm>
 
 // ed247_log_backtrace configuration
 //
@@ -72,8 +72,8 @@ void ed247::log::reset(ed247_log_level_t caller_level, const char* caller_filepa
   const char* new_filepath;
 #ifdef _MSC_VER
   size_t len;
-  _dupenv_s(&env_level, &len, ENV_VAR_LEVEL);
-  _dupenv_s(&new_filepath, &len, ENV_VAR_FILEPATH);
+  _dupenv_s((char**)&env_level, &len, ENV_VAR_LEVEL);
+  _dupenv_s((char**)&new_filepath, &len, ENV_VAR_FILEPATH);
 #else
   env_level = getenv(ENV_VAR_LEVEL);
   new_filepath = getenv(ENV_VAR_FILEPATH);

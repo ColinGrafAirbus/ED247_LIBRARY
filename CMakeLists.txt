@@ -21,7 +21,8 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         #
 # DEALINGS IN THE SOFTWARE.                                                   #
 ###############################################################################
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.12)
+cmake_policy(SET CMP0074 NEW)        # Use <PackageName>_ROOT
 project(ED247_LIBRARY VERSION 1.1.3) # Define target version ${CMAKE_PROJECT_VERSION})
 include(cmake/version.cmake)         # Compute ${VERSION} according to git
 include(cmake/flags.cmake)
@@ -58,7 +59,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
   endif()
 endif()
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
   set(CMAKE_SHARED_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 endif()
