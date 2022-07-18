@@ -29,27 +29,6 @@ function (test_add_executable _test_name _kind _exe_suffix)
   add_dependencies(${_test_name} ${exe_name})
 endfunction()
 
-
-#
-# declare a test to CTEST
-# ${_test_name}
-# ${_nb_actors} : 1 or 2
-#
-function (test_declare_ctest _test_name _nb_actors)
-  add_test(
-    NAME ${_test_name}
-    COMMAND "cmake"
-      -DTEST_NAME=${_test_name}
-      -DED247_LIB_DIR=$<TARGET_FILE_DIR:ed247>
-      -DWORKING_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}
-      -DTEST_NB_ACTORS=${_nb_actors}
-      -DTEST_MULTICAST_INTERFACE_IP=${TEST_MULTICAST_INTERFACE_IP}
-      -P ${CMAKE_SOURCE_DIR}/tests/cmake/execute_test.cmake
-  )
-endfunction()
-
-
-
 #
 # Add a test with a single actor
 # ${_test_name}
@@ -63,7 +42,16 @@ function(test_create_for_one_actor _test_name _kind)
 
   test_add_executable(${_test_name} ${_kind} main)
 
-  test_declare_ctest(${_test_name} 1)
+  add_test(
+    NAME ${_test_name}
+    COMMAND ${CMAKE_COMMAND}
+      -DTEST_NAME=${_test_name}
+      -DACTOR_ONE_EXE=$<TARGET_FILE:${_test_name}_main>
+      -DED247_LIB_DIR=$<TARGET_FILE_DIR:ed247>
+      -DWORKING_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}
+      -DTEST_MULTICAST_INTERFACE_IP=${TEST_MULTICAST_INTERFACE_IP}
+      -P ${CMAKE_SOURCE_DIR}/tests/cmake/execute_test.cmake
+  )
 endfunction()
 
 #
@@ -82,7 +70,17 @@ function(test_create_for_two_actors _test_name _kind)
   test_add_executable(${_test_name} ${_kind} sender)
   test_add_executable(${_test_name} ${_kind} receiver)
 
-  test_declare_ctest(${_test_name} 2)
+  add_test(
+    NAME ${_test_name}
+    COMMAND ${CMAKE_COMMAND}
+      -DTEST_NAME=${_test_name}
+      -DACTOR_ONE_EXE=$<TARGET_FILE:${_test_name}_sender>
+      -DACTOR_TWO_EXE=$<TARGET_FILE:${_test_name}_receiver>
+      -DED247_LIB_DIR=$<TARGET_FILE_DIR:ed247>
+      -DWORKING_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}
+      -DTEST_MULTICAST_INTERFACE_IP=${TEST_MULTICAST_INTERFACE_IP}
+      -P ${CMAKE_SOURCE_DIR}/tests/cmake/execute_test.cmake
+  )
 endfunction()
 
 # Functional tests
@@ -121,6 +119,8 @@ endif()
 install(FILES ${TEST_REPORT} DESTINATION ${PLATFORM_INSTALL_SUBDIR}doc)
 
 # run_tests target
-add_custom_target(run_tests ${CMAKE_CTEST_COMMAND} -O ${TEST_REPORT} --output-on-failure DEPENDS tests)
-add_custom_target(run_tests_functional ${CMAKE_CTEST_COMMAND} -R '^func_' --output-on-failure DEPENDS tests_functional)
-add_custom_target(run_tests_unitary ${CMAKE_CTEST_COMMAND} -R '^unit_' --output-on-failure DEPENDS tests_unitary)
+if(NOT MSVC)
+    add_custom_target(run_tests ${CMAKE_CTEST_COMMAND} -O ${TEST_REPORT} --output-on-failure DEPENDS tests)
+    add_custom_target(run_tests_functional ${CMAKE_CTEST_COMMAND} -R '^func_' --output-on-failure DEPENDS tests_functional)
+    add_custom_target(run_tests_unitary ${CMAKE_CTEST_COMMAND} -R '^unit_' --output-on-failure DEPENDS tests_unitary)
+endif()

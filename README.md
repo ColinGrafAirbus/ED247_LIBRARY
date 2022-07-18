@@ -36,7 +36,7 @@ The ED247 LIBRARY / LIBED247 can be built for the following operating systems an
 ## Building
 |     Tool     |         Purpose          | Release  |
 | :----------: | :----------------------: | :------: |
-|  [CMAKE][4]  |  Compilation framework   | 3.12.0   |
+|  [CMAKE][4]  |  Compilation framework   | 3.22.0   |
 |  [GTEST][2]  |       Tests only         | 1.8.1    |
 | [DOXYGEN][6] | Documentation generation | 1.8.11   |
 
