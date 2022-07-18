@@ -24,13 +24,21 @@
 # Special object target that will also be used by unitary tests
 add_library(ed247_objects OBJECT
     ed247_channel.cpp
+    ed247_channel.h
     ed247_cominterface.cpp
+    ed247_cominterface.h
     ed247_context.cpp
+    ed247_context.h
     ed247.cpp
+    ed247.h
     ed247_logs.cpp
+    ed247_logs.h
     ed247_signal.cpp
+    ed247_signal.h
     ed247_stream.cpp
+    ed247_stream.h
     ed247_xml.cpp
+    ed247_xml.h
 )
 
 target_link_libraries(ed247_objects

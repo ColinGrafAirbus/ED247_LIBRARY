@@ -84,6 +84,8 @@ namespace node
     static const std::string Errors { "Errors" };
     static const std::string Signal { "Signal" };
     static const std::string Signals { "Signals" };
+    static const std::string Frame { "Frame" };
+    //static const std::string FrameSize { "FrameSize" };
     static const std::string A429_Stream { "A429_Stream" };
     static const std::string A664_Stream { "A664_Stream" };
     static const std::string MessageSize { "MessageSize" };
@@ -93,6 +95,7 @@ namespace node
     static const std::string ANA_Stream { "ANA_Stream" };
     static const std::string NAD_Stream { "NAD_Stream" };
     static const std::string VNAD_Stream { "VNAD_Stream" };
+    static const std::string ETH_Stream { "ETH_Stream" };
     static const std::string Streams { "Streams" };
     static const std::string Stream { "Stream" };
     static const std::string MultiChannel { "MultiChannel" };
@@ -132,6 +135,7 @@ namespace attr
     static const std::string SampleDataTimestampOffset { "SampleDataTimestampOffset" };
     static const std::string ElectricalUnit { "ElectricalUnit" };
     static const std::string Dimensions { "Dimensions" };
+    //static const std::string Layer { "Layer" };
 }
 
 std::string xmlChar2string(const xmlChar *str);
@@ -277,6 +281,17 @@ class A825Stream : public Node, public Stream
 };
 
 class SERIALStream : public Node, public Stream
+{
+    private:
+        virtual void fill_attributes(const xmlNodePtr xml_node) final;
+        virtual void create_children(const xmlNodePtr xml_node) final;
+
+    public:
+        virtual void reset() final;
+        Errors errors;
+};
+
+class ETHStream : public Node, public Stream
 {
     private:
         virtual void fill_attributes(const xmlNodePtr xml_node) final;

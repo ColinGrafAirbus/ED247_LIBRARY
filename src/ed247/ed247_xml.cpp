@@ -501,6 +501,57 @@ void SERIALStream::create_children(const xmlNodePtr xml_node)
     }
 }
 
+// ETHStream
+
+void ETHStream::reset()
+{
+    info = LIBED247_STREAM_INFO_DEFAULT;
+    info.type = ED247_STREAM_TYPE_ETHERNET;
+    info.direction = ED247_DIRECTION_INOUT;
+}
+
+void ETHStream::fill_attributes(const xmlNodePtr xml_node)
+{
+    for(auto xml_attr = xml_node->properties ; xml_attr != nullptr ; xml_attr = xml_attr->next){
+        auto attr_name = xmlChar2string(xml_attr->name);
+        if(attr_name.compare(attr::Name) == 0){
+            set_value(info.name,xml_attr);
+        }else if(attr_name.compare(attr::Comment) == 0){
+            set_value(info.comment,xml_attr);
+        }else if(attr_name.compare(attr::ICD) == 0){
+            set_value(info.icd,xml_attr);
+        }else if(attr_name.compare(attr::SampleMaxNumber) == 0){
+            set_value(info.sample_max_number,xml_attr);
+        }else if(attr_name.compare(attr::SampleMaxSizeBytes) == 0){
+            set_value(info.sample_max_size_bytes,xml_attr);
+        }else if(attr_name.compare(attr::UID) == 0){
+            set_value(info.uid,xml_attr);
+        }else{
+            THROW_PARSER_ERROR(xml_node, "Unknown attribute [" << attr_name << "] in tag [" << node::ETH_Stream << "]");
+        }
+    }
+}
+
+void ETHStream::create_children(const xmlNodePtr xml_node)
+{
+    for(auto xml_node_iter = xml_node->children ; xml_node_iter != nullptr ; xml_node_iter = xml_node_iter->next){
+        if(xml_node_iter->type != XML_ELEMENT_NODE)
+            continue;
+        auto node_name = xmlChar2string(xml_node_iter->name);
+        if(node_name.compare(node::DataTimestamp) == 0){
+            data_timestamp.load(xml_node_iter);
+        }else if(node_name.compare(node::Errors) == 0){
+            errors.load(xml_node_iter);
+        }else if(node_name.compare(node::Frame) == 0){
+            //frame.load(xml_node_iter);
+        //}else if(node_name.compare(node::FrameSize) == 0){
+        //    frameSize.load(xml_node_iter);
+        }else{
+            THROW_PARSER_ERROR(xml_node_iter, "Unknown node [" << node_name << "] in tag [" << node::ETH_Stream << "]");
+        }
+    }
+}
+
 // DISSignal
 
 void DISSignal::reset()
@@ -1104,6 +1155,11 @@ void Channel::create_children(const xmlNodePtr xml_node)
                     std::unique_ptr<SERIALStream> stream = std::make_unique<SERIALStream>();
                     stream->load(xml_node_child_iter);
                     streams.push_back(std::move(stream));
+                // ETH
+                }else if(node_name.compare(node::ETH_Stream) == 0){
+                    std::unique_ptr<ETHStream> stream = std::make_unique<ETHStream>();
+                    stream->load(xml_node_child_iter);
+                    streams.push_back(std::move(stream));
                 // DISCRETE
                 }else if(node_name.compare(node::DIS_Stream) == 0){
                     std::unique_ptr<DISStream> stream = std::make_unique<DISStream>();
@@ -1152,6 +1208,11 @@ void Channel::create_children(const xmlNodePtr xml_node)
                 // SERIAL
                 }else if(node_name.compare(node::SERIAL_Stream) == 0){
                     std::unique_ptr<SERIALStream> stream = std::make_unique<SERIALStream>();
+                    stream->load(xml_node_child_iter);
+                    streams.push_back(std::move(stream));
+                // ETH
+                }else if(node_name.compare(node::ETH_Stream) == 0){
+                    std::unique_ptr<ETHStream> stream = std::make_unique<ETHStream>();
                     stream->load(xml_node_child_iter);
                     streams.push_back(std::move(stream));
                 // DISCRETE
