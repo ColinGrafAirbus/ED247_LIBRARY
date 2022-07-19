@@ -57,7 +57,7 @@ TEST(UtApiStreams, LoadStreams)
     // Check stream list size
     size_t size;
     ASSERT_EQ(ed247_stream_list_size(stream_list, &size), ED247_STATUS_SUCCESS);
-    ASSERT_EQ(size, (size_t)16);
+    ASSERT_EQ(size, (size_t)18);
     
     // Check the retrieved content, perform unvalid calls to verify robustness
     ASSERT_EQ(ed247_stream_list_next(stream_list, NULL), ED247_STATUS_FAILURE);
@@ -176,7 +176,29 @@ TEST(UtApiStreams, LoadStreams)
     ASSERT_EQ(stream_info->uid, (ed247_uid_t)1003);
     ASSERT_EQ(stream_info->sample_max_number, (size_t)1);
     ASSERT_EQ(stream_info->sample_max_size_bytes, (size_t)321);
-    
+
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
+    ASSERT_FALSE(strcmp(stream_info->name, "StreamEthernetFull"));
+    ASSERT_EQ(stream_info->direction, ED247_DIRECTION_INOUT);
+    ASSERT_EQ(stream_info->type, ED247_STREAM_TYPE_ETHERNET);
+    ASSERT_TRUE(stream_info->comment != NULL && strcmp(stream_info->comment, "ETH comment") == 0);
+    ASSERT_TRUE(stream_info->comment != NULL && strcmp(stream_info->icd, "ICD for ETHERNET") == 0);
+    ASSERT_EQ(stream_info->uid, (ed247_uid_t)1004);
+    ASSERT_EQ(stream_info->sample_max_number, (size_t)27);
+    ASSERT_EQ(stream_info->sample_max_size_bytes, (size_t)123);
+
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
+    ASSERT_FALSE(strcmp(stream_info->name, "StreamEthernet"));
+    ASSERT_EQ(stream_info->direction, ED247_DIRECTION_INOUT);
+    ASSERT_EQ(stream_info->type, ED247_STREAM_TYPE_ETHERNET);
+    ASSERT_TRUE(strcmp(stream_info->comment, "") == 0);
+    ASSERT_TRUE(strcmp(stream_info->icd, "") == 0);
+    ASSERT_EQ(stream_info->uid, (ed247_uid_t)1005);
+    ASSERT_EQ(stream_info->sample_max_number, (size_t)1);
+    ASSERT_EQ(stream_info->sample_max_size_bytes, (size_t)321);
+
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_STREQ(stream_info->name, "Stream4");
@@ -330,6 +352,9 @@ TEST(UtApiStreams, CheckFindStreamMethod)
     ASSERT_FALSE(strcmp(stream_info->name, "Stream8"));
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
+    ASSERT_FALSE(strcmp(stream_info->name, "Stream9"));
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_FALSE(strcmp(stream_info->name, "Stream4"));
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
@@ -358,6 +383,9 @@ TEST(UtApiStreams, CheckFindStreamMethod)
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_FALSE(strcmp(stream_info->name, "Stream18"));
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
+    ASSERT_FALSE(strcmp(stream_info->name, "Stream19"));
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_FALSE(strcmp(stream_info->name, "Stream14"));
@@ -431,6 +459,9 @@ TEST(UtApiStreams, CheckGetStreamFromContext)
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_STREQ(stream_info->name, "Stream8");
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
+    ASSERT_STREQ(stream_info->name, "Stream9");
     
     // Check the end of the list is reached and that on next request it will restart from the beginning
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
