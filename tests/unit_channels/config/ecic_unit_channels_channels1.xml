@@ -41,6 +41,9 @@ DEALINGS IN THE SOFTWARE.
                 <A825_Stream UID="5" Name="Stream5" SampleMaxNumber="10"/>
                 <A664_Stream UID="4" Name="Stream4" Direction="Out" SampleMaxNumber="10"/>
                 <SERIAL_Stream UID="12" Name="Stream12" Direction="Out" SampleMaxNumber="10" SampleMaxSizeBytes="123"/>
+                <ETH_Stream UID="13" Name="Stream13" SampleMaxNumber="10" SampleMaxSizeBytes="123">
+                    <Frame Layer="Application"/>
+                </ETH_Stream>
                 <DIS_Stream UID="6" Name="Stream6" SampleMaxSizeBytes="2" Direction="Out" SampleMaxNumber="2">
                     <Signals SamplingPeriodUs="10000">
                         <Signal Name="Signal20" ByteOffset="0"/>
@@ -105,6 +108,9 @@ DEALINGS IN THE SOFTWARE.
                 <A825_Stream UID="5" Name="InStream5" SampleMaxNumber="10"/>
                 <A664_Stream UID="4" Name="InStream4" Direction="In" SampleMaxNumber="10"/>
                 <SERIAL_Stream UID="12" Name="InStream12" Direction="In" SampleMaxNumber="10" SampleMaxSizeBytes="123"/>
+                <ETH_Stream UID="13" Name="InStream13" SampleMaxNumber="10" SampleMaxSizeBytes="123">
+                    <Frame Layer="Application"/>
+                </ETH_Stream>
                 <DIS_Stream UID="6" Name="InStream6" SampleMaxSizeBytes="2" Direction="In" SampleMaxNumber="2">
                     <Signals SamplingPeriodUs="10000">
                         <Signal Name="Signal20" ByteOffset="0"/>
