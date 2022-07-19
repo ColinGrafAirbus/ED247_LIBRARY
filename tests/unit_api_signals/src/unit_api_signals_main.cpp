@@ -305,8 +305,14 @@ TEST(UtApiSignals, DetectSignalsInStream)
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);    
     ASSERT_TRUE(stream_info->name != NULL && strcmp(stream_info->name, "StreamSERIAL") == 0);
     ASSERT_EQ(ed247_stream_contains_signals(stream, &yes_no), ED247_STATUS_SUCCESS);
-    ASSERT_EQ(yes_no, (uint8_t)0);  
-    
+    ASSERT_EQ(yes_no, (uint8_t)0);
+
+    ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);    
+    ASSERT_TRUE(stream_info->name != NULL && strcmp(stream_info->name, "StreamETH") == 0);
+    ASSERT_EQ(ed247_stream_contains_signals(stream, &yes_no), ED247_STATUS_SUCCESS);
+    ASSERT_EQ(yes_no, (uint8_t)0);
+
     ASSERT_EQ(ed247_stream_list_next(stream_list, &stream), ED247_STATUS_SUCCESS);
     ASSERT_EQ(ed247_stream_get_info(stream, &stream_info), ED247_STATUS_SUCCESS);
     ASSERT_TRUE(stream_info->name != NULL && strcmp(stream_info->name, "Stream1") == 0);

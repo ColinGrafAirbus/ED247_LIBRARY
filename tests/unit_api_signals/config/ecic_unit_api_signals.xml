@@ -38,6 +38,9 @@ DEALINGS IN THE SOFTWARE.
                 <A825_Stream UID="8" Name="StreamA825"/>
                 <A664_Stream UID="9" Name="StreamA664" Direction="Out"/>
                 <SERIAL_Stream UID="20" Name="StreamSERIAL" Direction="Out" SampleMaxSizeBytes="123"/>
+                <ETH_Stream UID="21" Name="StreamETH" SampleMaxSizeBytes="123">
+                    <Frame Layer="Application"/>
+                </ETH_Stream>
                 <DIS_Stream UID="3" Name="Stream1" SampleMaxSizeBytes="2" Direction="Out">
                     <Signals SamplingPeriodUs="10000">
                         <Signal Name="SignalDisMin" ByteOffset="0"/>
