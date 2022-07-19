@@ -85,7 +85,7 @@ namespace node
     static const std::string Signal { "Signal" };
     static const std::string Signals { "Signals" };
     static const std::string Frame { "Frame" };
-    //static const std::string FrameSize { "FrameSize" };
+    static const std::string FrameSize { "FrameSize" };
     static const std::string A429_Stream { "A429_Stream" };
     static const std::string A664_Stream { "A664_Stream" };
     static const std::string MessageSize { "MessageSize" };
@@ -300,6 +300,7 @@ class ETHStream : public Node, public Stream
     public:
         virtual void reset() final;
         Errors errors;
+        ed247_yesno_t enable_frame_size;
 };
 
 struct Signal

@@ -522,6 +522,7 @@ class BaseStream : public ed247_internal_stream_t, public std::enable_shared_fro
                     ED247_STREAM_TYPE_A664,
                     ED247_STREAM_TYPE_A825,
                     ED247_STREAM_TYPE_SERIAL,
+                    ED247_STREAM_TYPE_ETHERNET,
                     ED247_STREAM_TYPE_AUDIO,
                     ED247_STREAM_TYPE_DISCRETE,
                     ED247_STREAM_TYPE_ANALOG,

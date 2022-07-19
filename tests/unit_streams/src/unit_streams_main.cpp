@@ -177,7 +177,7 @@ TEST_P(StreamContext, SinglePushPop)
             ASSERT_TRUE(memcmp(stream_1->buffer().data() + sizeof(uint16_t), stream_1_sample->data(), stream_1_sample->size()) == 0);
         else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_A825)
             ASSERT_TRUE(memcmp(stream_1->buffer().data() + sizeof(uint8_t), stream_1_sample->data(), stream_1_sample->size()) == 0);
-        else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL)
+        else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL || stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_ETHERNET)
             ASSERT_TRUE(memcmp(stream_1->buffer().data() + sizeof(uint16_t), stream_1_sample->data(), stream_1_sample->size()) == 0);
         else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_ANALOG)
             ASSERT_TRUE(memcmp(stream_1->buffer().data(), stream_1_sample->data(), stream_1_sample->size()) != 0); // SWAP
@@ -279,7 +279,7 @@ TEST_P(StreamContext, MultiPushPop)
                 }else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_A825){
                     sample_size = *(uint8_t*)(stream_1->buffer().data()+frame_index);
                     frame_index += sizeof(uint8_t);
-                }else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL){
+                }else if(stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL || stream_1->get_configuration()->info.type == ED247_STREAM_TYPE_ETHERNET){
                     sample_size = *(uint16_t*)(stream_1->buffer().data()+frame_index);
                     frame_index += sizeof(uint16_t);
                 }
@@ -426,7 +426,7 @@ TEST_P(StreamContext, MultiPushPopDataTimestamp)
                 }else if(stream_out->get_configuration()->info.type == ED247_STREAM_TYPE_A825){
                     sample_size = *(uint8_t*)(stream_out->buffer().data()+frame_index);
                     frame_index += sizeof(uint8_t);
-                }else if(stream_out->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL){
+                }else if(stream_out->get_configuration()->info.type == ED247_STREAM_TYPE_SERIAL || stream_out->get_configuration()->info.type == ED247_STREAM_TYPE_ETHERNET){
                     sample_size = *(uint16_t*)(stream_out->buffer().data()+frame_index);
                     frame_index += sizeof(uint16_t);
                 }
@@ -512,6 +512,7 @@ int main(int argc, char **argv)
     configuration_files.push_back(config_path+"/ecic_unit_streams_ana.xml");
     configuration_files.push_back(config_path+"/ecic_unit_streams_nad.xml");
     configuration_files.push_back(config_path+"/ecic_unit_streams_vnad.xml");
+    configuration_files.push_back(config_path+"/ecic_unit_streams_eth.xml");
 
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

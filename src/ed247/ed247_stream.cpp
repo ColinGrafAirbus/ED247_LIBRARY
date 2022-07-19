@@ -616,6 +616,125 @@ void Stream<ED247_STREAM_TYPE_SERIAL>::allocate_buffer()
     _buffer.allocate(size);
 }
 
+// Stream<ETHERNET>
+
+template<>
+size_t Stream<ED247_STREAM_TYPE_ETHERNET>::encode(char * frame, size_t frame_size)
+{
+    if(_send_stack.size() == 0) return 0;
+    auto enable_frame_size = std::static_pointer_cast<xml::ETHStream>(_configuration)->enable_frame_size == ED247_YESNO_YES;
+    size_t frame_index = 0;
+    bool empty;
+    do{
+        const auto & sample = _send_stack.pop_front(&empty);
+
+        // Write Data Timestamp and Precise Data Timestamp
+        encode_data_timestamp(sample, frame, frame_size, frame_index);
+
+        // Write sample size
+        if(enable_frame_size){
+            if((frame_index + sizeof(uint16_t)) > frame_size) {
+                THROW_ED247_ERROR("Stream '" << get_name() << "': Stream buffer is too small to encode a new frame. Size: " << frame_size);
+            }
+            if(sample->size() != (uint16_t)sample->size())
+                THROW_ED247_ERROR("Stream '" << get_name() << "': Stream data size it too big for a 16 bits number ! (" << sample->size() << ")");
+            uint16_t size = (uint16_t)sample->size();
+            memcpy(frame + frame_index, &size, sizeof(uint16_t));
+            frame_index += sizeof(uint16_t);
+        }
+
+        // Write sample data
+        if((frame_index + sample->size()) > frame_size) {
+            THROW_ED247_ERROR("Stream '" << get_name() << "': Stream buffer is too small to encode a new frame. Size: " << frame_size);
+        }
+        memcpy(frame + frame_index, sample->data(), sample->size());
+        frame_index += sample->size();
+
+        if(!enable_frame_size && !empty){
+            THROW_ED247_ERROR("Stream '" << get_name() << "': Stream buffer cannot hold more than one frame.");
+        }
+
+    }while(!empty);
+    return frame_index;
+}
+
+template<>
+bool Stream<ED247_STREAM_TYPE_ETHERNET>::decode(const char * frame, size_t frame_size, const FrameHeader * header)
+{
+    auto enable_frame_size = std::static_pointer_cast<xml::ETHStream>(_configuration)->enable_frame_size == ED247_YESNO_YES;
+    size_t frame_index = 0;
+    size_t sample_size = 0;
+    static ed247_timestamp_t data_timestamp;
+    static ed247_timestamp_t timestamp;
+    while(frame_index < frame_size){
+        // Read Data Timestamp if necessary
+        if (decode_data_timestamp(frame, frame_size, frame_index, data_timestamp, timestamp) == false) return false;
+
+        if(enable_frame_size){
+            // Read sample size
+            if((frame_size-frame_index) < sizeof(uint16_t)) {
+              PRINT_ERROR("Stream '" << get_name() << "': Received frame size is invalid: " << frame_size);
+              return false;
+            }
+            sample_size = *(uint16_t*)(frame+frame_index);
+            frame_index += sizeof(uint16_t);
+        }else{
+            sample_size = frame_size-frame_index;
+        }
+
+        // Read sample data
+        if((frame_size-frame_index) < sample_size) {
+          PRINT_ERROR("Stream '" << get_name() << "': Received frame size is invalid: " << frame_size);
+          return false;
+        }
+        auto & sample = _recv_stack.next_write();
+        if (sample->copy(frame+frame_index, sample_size) == false) {
+          PRINT_ERROR("Stream '" << get_name() << "': Received frame size is invalid: " << frame_size);
+          return false;
+        }
+        frame_index += sample->size();
+        // Update data timestamp
+        if(_configuration->data_timestamp.enable == ED247_YESNO_YES){
+            sample->set_data_timestamp(data_timestamp);
+        }
+        // Update simulation time
+        sample->update_timestamp();
+        // Attach header
+        if(header)
+            sample->update_info(*header);
+        _recv_stack.increment();
+    }
+    // Callbacks
+    return run_callbacks();
+}
+
+template<>
+ed247_status_t Stream<ED247_STREAM_TYPE_ETHERNET>::check_sample_size(size_t sample_size) const
+{
+    return sample_size == _configuration->info.sample_max_size_bytes ? ED247_STATUS_SUCCESS : ED247_STATUS_FAILURE;
+}
+
+template<>
+void Stream<ED247_STREAM_TYPE_ETHERNET>::allocate_buffer()
+{
+    auto enable_frame_size = std::static_pointer_cast<xml::ETHStream>(_configuration)->enable_frame_size == ED247_YESNO_YES;
+    size_t size;
+    if(enable_frame_size){
+        size = _configuration->info.sample_max_number * (_configuration->info.sample_max_size_bytes + sizeof(uint16_t));
+    }else{
+        size = _configuration->info.sample_max_size_bytes;
+    }
+    if(_configuration->data_timestamp.enable == ED247_YESNO_YES){
+        // Data Timestamp
+        size += sizeof(ed247_timestamp_t);
+        // Data Timestamp Offsets
+        if(enable_frame_size){
+            size += (_configuration->info.sample_max_number > 1) ? (sizeof(uint32_t) * (_configuration->info.sample_max_number - 1)) : 0;
+        }
+    }
+    _buffer.allocate(size);
+}
+
 // Stream<AUDIO>
 
 template<>

@@ -506,8 +506,11 @@ void SERIALStream::create_children(const xmlNodePtr xml_node)
 void ETHStream::reset()
 {
     info = LIBED247_STREAM_INFO_DEFAULT;
+    info.comment = "";
+    info.icd = "";
     info.type = ED247_STREAM_TYPE_ETHERNET;
     info.direction = ED247_DIRECTION_INOUT;
+    enable_frame_size = ED247_YESNO_YES;
 }
 
 void ETHStream::fill_attributes(const xmlNodePtr xml_node)
@@ -544,8 +547,15 @@ void ETHStream::create_children(const xmlNodePtr xml_node)
             errors.load(xml_node_iter);
         }else if(node_name.compare(node::Frame) == 0){
             //frame.load(xml_node_iter);
-        //}else if(node_name.compare(node::FrameSize) == 0){
-        //    frameSize.load(xml_node_iter);
+        }else if(node_name.compare(node::FrameSize) == 0){
+            for(auto xml_attr = xml_node_iter->properties ; xml_attr != nullptr ; xml_attr = xml_attr->next){
+                auto attr_name = xmlChar2string(xml_attr->name);
+                if(attr_name.compare(attr::Enable) == 0){
+                    set_value(enable_frame_size,xml_attr);
+                }else{
+                    THROW_PARSER_ERROR(xml_node_iter, "Unknown attribute [" << attr_name << "] in tag [" << node::FrameSize << "]");
+                }
+            }
         }else{
             THROW_PARSER_ERROR(xml_node_iter, "Unknown node [" << node_name << "] in tag [" << node::ETH_Stream << "]");
         }
