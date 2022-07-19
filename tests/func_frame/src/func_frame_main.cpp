@@ -117,7 +117,7 @@ TEST_P(FrameContext, Main)
             }
         }else if(stream_output_info->type == ED247_STREAM_TYPE_A825){
             ASSERT_EQ(ssize, (sizeof(uint8_t)+stream_output_info->sample_max_size_bytes)*stream_output_info->sample_max_number);
-        }else if(stream_output_info->type == ED247_STREAM_TYPE_SERIAL){
+        }else if(stream_output_info->type == ED247_STREAM_TYPE_SERIAL || stream_output_info->type == ED247_STREAM_TYPE_ETHERNET){
             ASSERT_EQ(ssize, (sizeof(uint16_t)+stream_output_info->sample_max_size_bytes)*stream_output_info->sample_max_number);
         }else{
             ASSERT_EQ(ssize, stream_output_info->sample_max_size_bytes*stream_output_info->sample_max_number);
@@ -133,7 +133,7 @@ TEST_P(FrameContext, Main)
                     auto sample_size_tmp = *(uint8_t*)((char*)frame->data+frame_index);
                     frame_index += sizeof(uint8_t);
                     ASSERT_EQ(sample_size_tmp, sample_size);
-            }else if(stream_output_info->type == ED247_STREAM_TYPE_SERIAL){
+            }else if(stream_output_info->type == ED247_STREAM_TYPE_SERIAL || stream_output_info->type == ED247_STREAM_TYPE_ETHERNET){
                     auto sample_size_tmp = *(uint16_t*)((char*)frame->data+frame_index);
                     frame_index += sizeof(uint16_t);
                     ASSERT_EQ(sample_size_tmp, sample_size);
@@ -196,6 +196,7 @@ int main(int argc, char **argv)
     configuration_files.push_back(config_path+"/ecic_func_frame_a664.xml");
     configuration_files.push_back(config_path+"/ecic_func_frame_a825.xml");
     configuration_files.push_back(config_path+"/ecic_func_frame_serial.xml");
+    configuration_files.push_back(config_path+"/ecic_func_frame_eth.xml");
 
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
