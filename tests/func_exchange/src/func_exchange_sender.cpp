@@ -487,6 +487,8 @@ int main(int argc, char **argv)
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a825_mc_main.xml"});
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_serial_uc_main.xml"});
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_serial_mc_main.xml"});
+    stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_eth_uc_main.xml"});
+    stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_eth_mc_main.xml"});
     
     simple_stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a429_uc_main_simple.xml"});
     simple_stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a429_mc_main_simple.xml"});

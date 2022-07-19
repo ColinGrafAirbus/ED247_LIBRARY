@@ -625,6 +625,8 @@ int main(int argc, char **argv)
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a825_mc_tester.xml"});
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_serial_uc_tester.xml"});
     stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_serial_mc_tester.xml"});
+    stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_eth_uc_tester.xml"});
+    stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_eth_mc_tester.xml"});
     
     simple_stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a429_uc_tester_simple.xml"});
     simple_stream_files.push_back({TEST_ACTOR_ID, config_path+"/ecic_func_exchange_a429_mc_tester_simple.xml"});
