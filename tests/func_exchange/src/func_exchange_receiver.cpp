@@ -239,7 +239,7 @@ TEST_P(StreamContext, SingleFrame)
         const ed247_stream_info_t *info;
         ed247_stream_get_info(stream, &info);
         stream_name = info->name;
-        SAY_SELF("Callback on stream [" << stream_name << "]");
+        //SAY_SELF("Callback on stream [" << stream_name << "]");
         checkpoints++;
         return ED247_STATUS_SUCCESS;
     };

@@ -109,7 +109,11 @@ std::string UdpSocket::get_last_error()
     DWORD dwError = WSAGetLastError();
     size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dwError, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
     char errmsg[1024];
+#ifdef _MSC_VER
     strerror_s(errmsg, 1024, errno);
+#else
+    snprintf(errmsg, 1024, "%s", strerror(errno));
+#endif
     std::string err = std::string(messageBuffer, size);
     LocalFree(messageBuffer);
     return err + " | " + std::string(errmsg);

@@ -50,7 +50,9 @@
 #include <fstream>
 #include <stdexcept>
 #include <regex>
+#if !defined(_WIN32 ) || defined(_MSC_VER)
 #include "ed247_logs.h"
+#endif
 
 #ifndef _MSC_VER
 static const __attribute__((__unused__)) int zero = 0;
@@ -60,6 +62,33 @@ int zero = 0;
 int one = 1;
 #endif
 
+#if defined(_WIN32 ) && !defined(_MSC_VER)
+#undef THROW_ED247_ERROR
+#include <sstream>
+struct strize {
+template<typename T> strize& operator<<(T value) { _content << value; return *this; }
+operator std::string() const { return _content.str(); }
+private:
+std::stringstream _content;
+};
+namespace ed247 {
+  class exception : public std::exception
+  {
+  public:
+    exception(std::string message) : _message (message) {};
+    virtual ~exception() throw () override {}
+    inline const char* what() const noexcept override { return _message.c_str(); }
+  private:
+    std::string _message;
+  };
+}
+#define THROW_ED247_ERROR(message)                  \
+  do {                                              \
+    throw ed247::exception(strize() << message);    \
+  } while(0)
+#define SAY(m) do { } while (0)
+#define PRINT_DEBUG(m) do { } while (0)
+#endif
 
 namespace synchro
 {
@@ -70,7 +99,11 @@ std::string get_last_socket_error()
     DWORD dwError = WSAGetLastError();
     size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dwError, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
     char errmsg[1024];
+#ifdef _MSC_VER
     strerror_s(errmsg, 1024, errno);
+#else
+    snprintf(errmsg, 1024, "%s", strerror(errno));
+#endif
     std::string err = std::string(messageBuffer, size);
     LocalFree(messageBuffer);
     return err + " | " + std::string(errmsg);

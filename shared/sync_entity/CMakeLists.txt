@@ -22,7 +22,7 @@
 # DEALINGS IN THE SOFTWARE.                                                   #
 ###############################################################################
 
-add_library(sync_entity OBJECT sync_entity.cpp)
+add_library(sync_entity STATIC sync_entity.cpp)
 
 target_include_directories(sync_entity
   PUBLIC

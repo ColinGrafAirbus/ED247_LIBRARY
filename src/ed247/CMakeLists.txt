@@ -22,7 +22,7 @@
 # DEALINGS IN THE SOFTWARE.                                                   #
 ###############################################################################
 # Special object target that will also be used by unitary tests
-add_library(ed247_objects OBJECT
+set(sources
     ed247_channel.cpp
     ed247_channel.h
     ed247_cominterface.cpp
@@ -40,6 +40,9 @@ add_library(ed247_objects OBJECT
     ed247_xml.cpp
     ed247_xml.h
 )
+add_library(ed247_objects STATIC
+    ${sources}
+)
 
 target_link_libraries(ed247_objects
   PUBLIC
@@ -50,22 +53,51 @@ target_link_libraries(ed247_objects
 
 target_include_directories(ed247_objects
   PUBLIC
-     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-     $<INSTALL_INTERFACE:include>
+     .
+     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_compile_definitions(ed247_objects
     PRIVATE
         "_PRODUCT_VERSION=\"${VERSION}\""
         "_PRODUCT_NAME=\"${CMAKE_PROJECT_NAME}\""
-        $<$<PLATFORM_ID:Windows>:LIBED247_EXPORTS>
 )
-
+if(WIN32 AND NOT MSVC)
+    target_compile_definitions(ed247_objects
+        PRIVATE
+           "_WIN32_WINNT=0x0501"
+    )
+endif()
+target_compile_definitions(ed247_objects
+    PUBLIC
+        LIBED247_STATIC
+)
 # ED247 Library definition
-add_library(ed247 SHARED)
+add_library(ed247 SHARED ${sources})
+target_include_directories(ed247
+  PUBLIC
+     .
+     ${CMAKE_CURRENT_BINARY_DIR}
+)
+target_link_libraries(ed247
+  PUBLIC
+     LibXml2::LibXml2
+     $<$<PLATFORM_ID:Windows>:wsock32>
+     $<$<PLATFORM_ID:Windows>:ws2_32>
+)
+target_compile_definitions(ed247
+    PRIVATE
+        "_PRODUCT_VERSION=\"${VERSION}\""
+        "_PRODUCT_NAME=\"${CMAKE_PROJECT_NAME}\""
+        LIBED247_EXPORTS
+)
+if(WIN32 AND NOT MSVC)
+    target_compile_definitions(ed247
+        PRIVATE
+           "_WIN32_WINNT=0x0501"
+    )
+endif()
 add_library(Ed247::ed247 ALIAS ed247)
-target_link_libraries(ed247 PUBLIC ed247_objects)
 set_target_properties(ed247 PROPERTIES PUBLIC_HEADER ed247.h)
 
 # Generate XSD header file containing the XSD as a string

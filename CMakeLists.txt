@@ -21,8 +21,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         #
 # DEALINGS IN THE SOFTWARE.                                                   #
 ###############################################################################
-cmake_minimum_required(VERSION 3.22)
-cmake_policy(SET CMP0074 NEW)        # Use <PackageName>_ROOT
+cmake_minimum_required(VERSION 3.7)
 project(ED247_LIBRARY VERSION 1.1.3) # Define target version ${CMAKE_PROJECT_VERSION})
 include(cmake/version.cmake)         # Compute ${VERSION} according to git
 include(cmake/flags.cmake)
@@ -45,19 +44,13 @@ set(TEST_MULTICAST_INTERFACE_IP "${TEST_MULTICAST_INTERFACE_IP}" CACHE STRING "I
 
 
 ## LIBXML2
-if (NOT LibXml2_ROOT)
-  # Fix issue while building in 32bits
-  set(LibXml2_ROOT /)
-endif()
-find_package(LibXml2 2.9.1 REQUIRED)
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  # Fix iconv.h dependency
-  find_package(Iconv QUIET)
-  if (Iconv_FOUND)
-    message("Using iconv header: ${Iconv_INCLUDE_DIRS}")
-    target_include_directories(LibXml2::LibXml2 INTERFACE ${Iconv_INCLUDE_DIRS})
-  endif()
-endif()
+find_package(libxml2 2.9.1 CONFIG REQUIRED)
+add_library(LibXml2 INTERFACE)
+add_library(LibXml2::LibXml2 ALIAS LibXml2)
+set_target_properties(LibXml2
+    PROPERTIES
+         INTERFACE_LINK_LIBRARIES "libxml2::libxml2"
+)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
