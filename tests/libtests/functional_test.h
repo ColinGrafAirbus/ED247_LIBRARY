@@ -92,16 +92,9 @@ struct TestParams {
 class TestContext : public ::testing::TestWithParam<TestParams>
 {
 protected:
-  TestContext() : _actor(nullptr) {
-    synchro::Entity::init();
-  }
-
-  ~TestContext() {
-    delete _actor;
-  }
-
   void SetUp() override {
     if(!_actor) {
+        synchro::Entity::init();
       _actor = new synchro::Entity(GetParam().actor_id);
     }
     ASSERT_NE(_actor, nullptr);
@@ -126,7 +119,19 @@ protected:
   }
 
   ed247_context_t   _context;
-  synchro::Entity * _actor;
+  static synchro::Entity * _actor;
+
+private:
+  static struct Cleanup
+  {
+    ~Cleanup()
+    {
+        delete _actor;
+    }
+  } _cleanup;
 };
+
+synchro::Entity * TestContext::_actor = nullptr;
+TestContext::Cleanup TestContext::_cleanup;
 
 #endif
