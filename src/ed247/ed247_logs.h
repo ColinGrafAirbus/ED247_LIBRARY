@@ -57,7 +57,7 @@
 
 // Logger internals
 namespace ed247 {
-  struct LIBED247_EXPORT log
+  struct log
   {
     static constexpr const char* ENV_VAR_LEVEL    = "ED247_LOG_LEVEL";
     static constexpr const char* ENV_VAR_FILEPATH = "ED247_LOG_FILEPATH";
@@ -101,7 +101,7 @@ namespace ed247 {
 }
 
 // Generate a backtrace (if supported)
-extern LIBED247_EXPORT void ed247_log_backtrace();
+extern void ed247_log_backtrace();
 
 // ED247 exception
 namespace ed247 {
@@ -144,7 +144,7 @@ class hex_stream
 {
 public:
   hex_stream(const void* payload, int len) : _payload((const uint8_t*)payload), _len(len) {}
-  LIBED247_EXPORT friend std::ostream& operator<<(std::ostream& stream, const hex_stream&);
+  friend std::ostream& operator<<(std::ostream& stream, const hex_stream&);
 private:
   const uint8_t* _payload;
   int            _len;

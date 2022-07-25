@@ -56,7 +56,7 @@ const uint16_t      DEFAULT_PORT{3000};
 const std::string   DEFAULT_IP{"127.0.0.1"};
 
 uint64_t get_time_us();
-void sleep_us(uint32_t duration_us);
+void sleep_us(uint64_t duration_us);
 
 struct SocketEntity
 {

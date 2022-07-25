@@ -50,9 +50,6 @@
 #include <fstream>
 #include <stdexcept>
 #include <regex>
-#if !defined(_WIN32 ) || defined(_MSC_VER)
-#include "ed247_logs.h"
-#endif
 
 #ifndef _MSC_VER
 static const __attribute__((__unused__)) int zero = 0;
@@ -62,8 +59,6 @@ int zero = 0;
 int one = 1;
 #endif
 
-#if defined(_WIN32 ) && !defined(_MSC_VER)
-#undef THROW_ED247_ERROR
 #include <sstream>
 struct strize {
 template<typename T> strize& operator<<(T value) { _content << value; return *this; }
@@ -88,7 +83,6 @@ namespace ed247 {
   } while(0)
 #define SAY(m) do { } while (0)
 #define PRINT_DEBUG(m) do { } while (0)
-#endif
 
 namespace synchro
 {
@@ -113,7 +107,7 @@ std::string get_last_socket_error()
 }
 
 #ifdef _MSC_VER
-int gettimeofday(struct timeval * tp, struct timezone * tzp)
+int gettimeofday(struct timeval * tp, struct timezone *)
 {
     // Note: some broken versions only have 8 trailing zero's, the correct epoch has 9 trailing zero's
     // This magic number is the number of 100 nanosecond intervals since January 1, 1601 (UTC)
@@ -152,10 +146,10 @@ uint64_t get_time_us()
 #endif
 }
 
-void sleep_us(uint32_t duration_us)
+void sleep_us(uint64_t duration_us)
 {
 #ifdef _WIN32
-    Sleep(duration_us / 1000);
+    Sleep((DWORD)(duration_us / 1000));
 #else
     struct timespec ts;
     ts.tv_sec = duration_us / (1000 * 1000);
@@ -213,7 +207,7 @@ Server::Server(Entity * entity):
     memset(&addr, 0, sizeof(sockaddr_in));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = INADDR_ANY;
-    addr.sin_port = htons(DEFAULT_PORT + _entity->id);
+    addr.sin_port = htons((uint16_t)(DEFAULT_PORT + _entity->id));
     
     SAY("SYNC ENTITY " << _entity->id << ": Bind server on port " << (uint32_t)(DEFAULT_PORT + _entity->id));
 
@@ -355,7 +349,7 @@ void Client::connect(uint32_t eid, uint32_t timeout_us)
 #else
     addr.sin_addr.s_addr = inet_addr(ip_address.c_str());
 #endif
-    addr.sin_port = htons(DEFAULT_PORT + eid);
+    addr.sin_port = htons((uint16_t)(DEFAULT_PORT + eid));
 
     while((get_time_us() - begin_us) < timeout_us &&
         (sockerr = ::connect(_servers[eid], (struct sockaddr *) &addr, sizeof(sockaddr_in))) != 0)

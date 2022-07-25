@@ -23,12 +23,21 @@
  *****************************************************************************/
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 
 #include <ed247.h>
-#include "ed247_logs.h"
 #include "sync_entity.h"
 
 int check_status(ed247_context_t context, ed247_status_t status);
+
+#define PRINT_ERROR(m) \
+    do { std::cerr << "[ERROR] " << m << std::endl; } while (0)
+#define PRINT_INFO(m) \
+    do { std::cout << "[INFO] " << m << std::endl; } while (0)
+#define SAY(m) \
+    do { std::cout << m << std::endl; } while (0)
+#define PRINT_DEBUG(m) \
+    SAY(m)
 
 void help() {
   std::cout <<

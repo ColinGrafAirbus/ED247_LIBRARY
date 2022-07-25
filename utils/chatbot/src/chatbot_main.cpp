@@ -22,11 +22,11 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************/
 #include <list>
+#include <cstring>
+#include <iostream>
 
 #include <ed247.h>
-#include "ed247_logs.h"
-#include "sync_entity.h"
-#include "string.h"
+#include <sync_entity.h>
 
 struct Stream;
 
@@ -60,6 +60,12 @@ struct Stream {
 };
 
 int check_status(ed247_context_t context, ed247_status_t status);
+
+#define PRINT_ERROR(m) \
+    do { std::cerr << "[ERROR] " << m << std::endl; } while (0)
+#define PRINT_INFO(m) \
+    do { std::cout << "[INFO] " << m << std::endl; } while (0)
+
 
 int main(int argc, char *argv[])
 {
@@ -144,7 +150,7 @@ int main(int argc, char *argv[])
             if(st->info->direction == ED247_DIRECTION_IN) continue;
             PRINT_INFO("Update stream [" << std::string(st->info->name) << "]");
             for(uint32_t i = 0 ; i < st->info->sample_max_number ; i++){
-                uint32_t value = i + loop;
+                uint32_t value = (uint32_t)(i + loop);
                 PRINT_INFO("Update stream [" << std::string(st->info->name) << "] / sample [" << i << "]");
                 if(st->signals.empty()){
                     if (st->sample_size == 4) {

@@ -3,7 +3,6 @@
 #include "ed247.h"
 #include "memhooks.h"
 #include "gtest/gtest.h"
-#include "ed247_logs.h"
 
 #ifdef __linux__
 #include <arpa/inet.h>
@@ -14,6 +13,19 @@
 #define ED247_ONE_SECOND (1000 * ED247_ONE_MILI)
 
 namespace tests_tools {
+
+
+    // Helper to convert a payload to hexa stream: stream << "data: " << hex_stream(data, 4) << std::endl;
+    class hex_stream
+    {
+    public:
+      hex_stream(const void* payload, int len) : _payload((const uint8_t*)payload), _len(len) {}
+      friend std::ostream& operator<<(std::ostream& stream, const hex_stream&);
+    private:
+      const uint8_t* _payload;
+      int            _len;
+    };
+
   /**
    * @brief The function counts the number of line where regex trace_to_find is found in the file pointed by filename.
    * @param[in] filename designates the file to parse.
@@ -31,7 +43,7 @@ namespace tests_tools {
   // GTEST predicate to compare two payload
   inline ::testing::AssertionResult AssertPayloadEq(const char* exprPayload1,
                                                     const char* exprPayload2,
-                                                    const char* exprSize,
+                                                    const char*,
                                                     const char* payload1,
                                                     const char* payload2,
                                                     int size)

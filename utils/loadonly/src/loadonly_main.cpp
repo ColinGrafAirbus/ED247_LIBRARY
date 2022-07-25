@@ -22,13 +22,18 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *****************************************************************************/
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
+#include <iostream>
 
 #include <ed247.h>
-#include <ed247_logs.h>
 
 int check_status(ed247_context_t context, ed247_status_t status);
+
+#define PRINT_ERROR(m) \
+    do { std::cerr << "[ERROR] " << m << std::endl; } while (0)
+#define PRINT_INFO(m) \
+    do { std::cout << "[INFO] " << m << std::endl; } while (0)
 
 int main(int argc, char *argv[])
 {
